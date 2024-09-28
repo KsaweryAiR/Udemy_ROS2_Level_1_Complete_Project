@@ -17,7 +17,7 @@ class TurtleControllerNode(Node):
         super().__init__("turtle_controller") 
         self.get_logger().info("turtle_controller")
 
-        self.declare_parameter("turtle_speed", 3)
+        self.declare_parameter("turtle_speed", 3.0)
         self.turtlePose_x_ = 0.0
         self.turtlePose_y_ = 0.0
         self.turtlePose_theta_ = 0.0
