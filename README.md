@@ -20,7 +20,7 @@
 ```bash
 ros2 launch turtle_killer_bringup turtle_killer_app.launch.pyy
 ```
-<img src="gifs/V1.gif" alt="using a color picker" width="50%" />
+<img src="gifs/V1.gif" alt="using a color picker" width="20%" />
 
 **Running second vesrion** 
 ```bash
