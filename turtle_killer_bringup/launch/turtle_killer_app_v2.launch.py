@@ -26,7 +26,7 @@ def generate_launch_description():
         package="turtle_killer_pkg",
         executable="turtle_controller_v2",
         parameters=[
-            {"turtle_speed": 6},
+            {"turtle_speed": 6.5},
         ]
     )
 
@@ -34,3 +34,4 @@ def generate_launch_description():
     ld.add_action(turtle_spawner_node)
     ld.add_action(turtle_controller_node)
     return ld
+

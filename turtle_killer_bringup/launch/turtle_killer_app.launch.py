@@ -26,7 +26,7 @@ def generate_launch_description():
         package="turtle_killer_pkg",
         executable="turtle_controller",
         parameters=[
-            {"turtle_speed": 5},
+            {"turtle_speed": 5.0},
         ]
     )
 
