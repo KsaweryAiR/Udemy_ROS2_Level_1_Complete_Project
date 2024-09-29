@@ -12,22 +12,19 @@ from turtle_killer_interfaces.msg import TurtleArray
 from turtle_killer_interfaces.srv import CatchTurtle
 
 
-class TurtleControllerNode(Node): 
+class TurtleControllerNodeV3(Node): 
     def __init__(self):
-        super().__init__("turtle_controller") 
-        self.get_logger().info("turtle_controller")
+        super().__init__("turtle_controller_v3") 
 
-        self.declare_parameter("turtle_speed", 3.0)
         self.turtlePose_x_ = 0.0
         self.turtlePose_y_ = 0.0
         self.turtlePose_theta_ = 0.0
         self.turtles_array_ = []
-        self.speed_ = self.get_parameter("turtle_speed").value
 
         self.TurtleArray_subscriber_ = self.create_subscription(TurtleArray, "alive_turtles", self.callback_alive_turtles, 10)
         self.TurtlePose_subscriber_ = self.create_subscription(Pose, "turtle1/pose", self.callback_turtle1_pose, 10)
         self.publisher_ = self.create_publisher(Twist, "turtle1/cmd_vel", 10)
-        self.timer_ = self.create_timer(1.0/self.speed_, self.publish_move_turtle)
+        self.timer_ = self.create_timer(0.01, self.publish_move_turtle)
     
 
     #############################subscriber 
@@ -51,7 +48,6 @@ class TurtleControllerNode(Node):
 
     def calculate_track(self):
         if not self.turtles_array_:  
-            self.get_logger().warn("No turtles in the array.")
             return "empty", 0.0, 0.0, float('inf'), float('inf') 
         
         min_street = float('inf')
@@ -81,20 +77,15 @@ class TurtleControllerNode(Node):
         twist = Twist()
         name_min_turtle, min_street, rotate, delta_x, delta_y = self.calculate_track()
         if name_min_turtle != "empty":
-            if abs(rotate) >= 0.001:
-                twist.linear.x = 0.0
-                twist.angular.z = rotate * self.speed_
-            else:
-                twist.linear.x = min_street * self.speed_
-                twist.angular.z = 0.0
-
-            if abs(delta_x) <= 0.07 and abs(delta_y) <= 0.07:
+        
+            twist.angular.z = rotate * 6.0
+            twist.linear.x = min_street * 2.0
+            
+            if abs(delta_x) <= 0.09 and abs(delta_y) <= 0.09:
                 self.call_catch_turtle_server(name_min_turtle)
                 twist.angular.z = 0.0
             self.publisher_.publish(twist)
 
-        else:
-            self.get_logger().warn("EMPTY ARRAY")
 
     #############################client           
 
@@ -122,7 +113,7 @@ class TurtleControllerNode(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = TurtleControllerNode() 
+    node = TurtleControllerNodeV3() 
     rclpy.spin(node) 
     rclpy.shutdown()
 

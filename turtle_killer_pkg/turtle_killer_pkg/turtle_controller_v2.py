@@ -112,7 +112,7 @@ class TurtleControllerNodeV2(Node):
     def callback_call_catch_turtle(self, futue, catch_turtle):
         try:
             response = futue.result()
-            self.get_logger().info(f"{response.succes}")
+            self.get_logger().info(f"{response.success}")
         except Exception as e:
             self.get_logger().error("Service call failer %r" % (e,))
 

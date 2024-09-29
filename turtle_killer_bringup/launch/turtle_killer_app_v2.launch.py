@@ -18,7 +18,7 @@ def generate_launch_description():
         package="turtle_killer_pkg",
         executable="turtle_spawner",
         parameters=[
-            {"time_spawner": 0.7},
+            {"time_spawner": 0.6},
         ]
     )
 
@@ -26,7 +26,7 @@ def generate_launch_description():
         package="turtle_killer_pkg",
         executable="turtle_controller_v2",
         parameters=[
-            {"turtle_speed": 6.5},
+            {"turtle_speed": 5.0},
         ]
     )
 

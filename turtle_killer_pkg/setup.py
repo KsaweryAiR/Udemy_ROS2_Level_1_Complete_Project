@@ -23,6 +23,7 @@ setup(
             "turtle_spawner = turtle_killer_pkg.turtle_spawner:main",
             "turtle_controller = turtle_killer_pkg.turtle_controller:main",
             "turtle_controller_v2 = turtle_killer_pkg.turtle_controller_v2:main",
+            "turtle_controller_v3 = turtle_killer_pkg.turtle_controller_v3:main",
         ],
     },
 )

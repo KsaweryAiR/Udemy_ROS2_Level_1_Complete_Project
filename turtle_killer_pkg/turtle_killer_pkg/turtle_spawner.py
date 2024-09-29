@@ -23,7 +23,8 @@ class TurtleSpawnerNode(Node):
         self.group_turtles_ = TurtleArray()
         self.publisher_ = self.create_publisher(TurtleArray, "alive_turtles", 10)
         self.server_= self.create_service(CatchTurtle, "catch_turtle", self.callback_catch_turtle) 
-        self.timer_ = self.create_timer(self.time_spawner_, self.publish_turtles)
+        self.timer_ = self.create_timer(self.time_spawner_, self.new_turtle)
+        self.timer2_ = self.create_timer(0.01, self.publish_turtles)
         self.catch_turtle_ = "empty"
 
     #############################server
@@ -38,7 +39,7 @@ class TurtleSpawnerNode(Node):
 
     def location_spawner(self):
         x = round(random.uniform(0.5, 10.5), 3)
-        y = round(random.uniform(1, 10), 3)
+        y = round(random.uniform(0.5, 10.5), 3)
         theta = round(random.uniform(0.00, 6.28), 3)
         name = f"free_turtle{self.number_}"
         self.number_+=1
@@ -50,7 +51,7 @@ class TurtleSpawnerNode(Node):
 
     #############################publisher 
 
-    def publish_turtles(self):
+    def new_turtle(self):
         new_turtle = Turtle()
 
         x, y, theta, name = self.location_spawner()
@@ -58,13 +59,12 @@ class TurtleSpawnerNode(Node):
         new_turtle.y = y
         new_turtle.theta = theta
         new_turtle.name = name
-
         self.group_turtles_.turtles.append(new_turtle)
-
         self.call_turtle_spawn_server(x, y, theta, name)
+        
+    def publish_turtles(self):
         self.publisher_.publish(self.group_turtles_)
         
-
     #############################client 
 
 

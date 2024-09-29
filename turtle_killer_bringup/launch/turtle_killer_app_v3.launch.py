@@ -8,9 +8,9 @@ def generate_launch_description():
         package="turtlesim",
         executable="turtlesim_node",
         parameters=[
-                {'background_r': 72},
-                {'background_g': 34},
-                {'background_b': 124}
+                {'background_r': 0},
+                {'background_g': 0},
+                {'background_b': 50}
             ]
     )
 
@@ -18,16 +18,13 @@ def generate_launch_description():
         package="turtle_killer_pkg",
         executable="turtle_spawner",
         parameters=[
-            {"time_spawner": 1.2},
+            {"time_spawner": 1.5},
         ]
     )
 
     turtle_controller_node = Node(
         package="turtle_killer_pkg",
-        executable="turtle_controller",
-        parameters=[
-            {"turtle_speed": 3.0},
-        ]
+        executable="turtle_controller_v3",
     )
 
     ld.add_action(turtle_simulator_node)
