@@ -27,3 +27,9 @@ ros2 launch turtle_killer_bringup turtle_killer_app.launch.pyy
 ros2 launch turtle_killer_bringup turtle_killer_app_v2.launch.py
 ```
 <img src="gifs/V2.gif" alt="using a color picker" width="40%" />
+
+**Running third vesrion** 
+```bash
+ros2 launch turtle_killer_bringup turtle_killer_app_v3.launch.py
+```
+<img src="gifs/V3.gif" alt="using a color picker" width="40%" />
