@@ -18,7 +18,7 @@
 
 **Running first vesrion** 
 ```bash
-ros2 launch turtle_killer_bringup turtle_killer_app.launch.pyy
+ros2 launch turtle_killer_bringup turtle_killer_app.launch.py
 ```
 <img src="gifs/VV1.gif" alt="using a color picker" width="40%" />
 
